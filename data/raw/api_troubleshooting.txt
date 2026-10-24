@@ -1,0 +1,10 @@
+# API Troubleshooting
+
+HTTP 401 means the request is unauthenticated or the credentials
+are missing or invalid. Check the authorization header.
+
+HTTP 404 means the requested resource or endpoint could not be found.
+Verify the URL path and HTTP method.
+
+HTTP 500 indicates an internal server error. Inspect application logs
+and reproduce the request to identify the underlying problem.

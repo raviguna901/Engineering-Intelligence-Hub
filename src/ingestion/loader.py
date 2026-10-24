@@ -9,11 +9,20 @@ SUPPORTED_EXTENSIONS = {".pdf", ".md", ".txt"}
 
 
 
-    
 def clean_text(text: str) -> str:
-    """Normalize whitespace in extracted document text."""
+    """Normalize whitespace while preserving paragraph and heading breaks."""
     text = text.replace("\x00", " ")
-    return re.sub(r"\s+", " ", text).strip()
+    text = text.replace("\r\n", "\n").replace("\r", "\n")
+
+    lines = [
+        re.sub(r"[ \t]+", " ", line).strip()
+        for line in text.split("\n")
+    ]
+
+    text = "\n".join(lines)
+    text = re.sub(r"\n{3,}", "\n\n", text)
+
+    return text.strip()
 
 
 
